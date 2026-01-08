@@ -117,13 +117,14 @@ export async function performCheckin(config) {
         // Set viewport
         await page.setViewport({ width: 1920, height: 1080 });
 
-        // Set geolocation
-        logger.info(`📍 Setting geolocation: ${latitude}, ${longitude}`);
-        await page.setGeolocation({ latitude, longitude });
-
-        // Grant geolocation permission
+        // IMPORTANT: Grant geolocation permission FIRST (before setting geolocation)
+        logger.info(`📍 Granting geolocation permission for ${SKEMARAJA_URL}`);
         const context = browser.defaultBrowserContext();
         await context.overridePermissions(SKEMARAJA_URL, ['geolocation']);
+
+        // Now set the geolocation coordinates
+        logger.info(`📍 Setting geolocation: ${latitude}, ${longitude}`);
+        await page.setGeolocation({ latitude, longitude, accuracy: 100 });
 
         // Set realistic user agent
         await page.setUserAgent(
@@ -160,6 +161,32 @@ export async function performCheckin(config) {
         // Take screenshot of initial page for debugging
         await saveScreenshot(page, 'page_loaded');
         logger.info('📸 Screenshot taken after page load');
+
+        // Trigger browser geolocation to ensure website receives coordinates
+        logger.info('📍 Triggering geolocation in browser...');
+        await page.evaluate(() => {
+            return new Promise((resolve, reject) => {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        console.log('Geolocation success:', pos.coords.latitude, pos.coords.longitude);
+                        resolve(pos);
+                    },
+                    (err) => {
+                        console.log('Geolocation error:', err.message);
+                        reject(err);
+                    },
+                    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                );
+            });
+        }).catch(err => {
+            logger.warn(`⚠️ Geolocation trigger warning: ${err.message}`);
+        });
+
+        // Wait a moment for page to update with location
+        await randomDelay(2000, 3000);
+
+        // Take screenshot after geolocation
+        await saveScreenshot(page, 'after_geolocation');
 
         // Wait for form to be visible with increased timeout
         try {
