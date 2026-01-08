@@ -39,12 +39,29 @@ const config = {
     usersFile: process.env.USERS_FILE || './users.json',
 };
 
-// Schedule definitions
+// Schedule definitions with time ranges for random delays
+// Cron triggers at start time, then random delay within the range
 const SCHEDULES = [
-    { name: 'Pagi', cron: config.cronPagi, status_wfh: '2', shift: '1' },
-    { name: 'Siang', cron: config.cronSiang, status_wfh: '2', shift: '1' },
-    { name: 'Sore', cron: config.cronSore, status_wfh: '2', shift: '1' },
+    {
+        name: 'Pagi', cron: config.cronPagi, status_wfh: '2', shift: '1',
+        startMinute: 0, endMinute: 60
+    },  // Random 0-60 menit dari jam 07:00
+    {
+        name: 'Siang', cron: config.cronSiang, status_wfh: '2', shift: '1',
+        startMinute: 0, endMinute: 55
+    },  // Random 0-55 menit dari jam 12:05
+    {
+        name: 'Sore', cron: config.cronSore, status_wfh: '2', shift: '1',
+        startMinute: 0, endMinute: 60
+    },  // Random 0-60 menit dari jam 17:00
 ];
+
+// Helper: Get random delay within schedule range
+function getRandomDelayInRange(schedule) {
+    const minMs = (schedule.startMinute || 0) * 60 * 1000;
+    const maxMs = (schedule.endMinute || 30) * 60 * 1000;
+    return minMs + Math.random() * (maxMs - minMs);
+}
 
 // Load or fetch users
 async function getUsers() {
@@ -202,10 +219,31 @@ if (args.includes('--sync')) {
     logger.info('');
 
     SCHEDULES.forEach(schedule => {
-        logger.info(`📅 ${schedule.name}: ${schedule.cron}`);
+        const rangeMinutes = schedule.endMinute - schedule.startMinute;
+        logger.info(`📅 ${schedule.name}: ${schedule.cron} (random +${schedule.startMinute}-${schedule.endMinute} menit)`);
 
-        cron.schedule(schedule.cron, () => {
+        cron.schedule(schedule.cron, async () => {
+            // Calculate random delay within schedule range
+            const randomDelayMs = getRandomDelayInRange(schedule);
+            const delayMinutes = Math.round(randomDelayMs / 60000);
+
+            const witaTime = getWitaTime();
+            const scheduledTime = new Date(witaTime.getTime() + randomDelayMs);
+            const scheduledTimeStr = scheduledTime.toLocaleTimeString('id-ID', {
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+
             logger.info(`⏰ Cron triggered: ${schedule.name}`);
+            logger.info(`🎲 Random delay: ${delayMinutes} menit`);
+            logger.info(`📌 Scheduled check-in at: ${scheduledTimeStr} WITA`);
+
+            // Wait for random delay
+            if (randomDelayMs > 0) {
+                await new Promise(r => setTimeout(r, randomDelayMs));
+            }
+
+            // Now run the actual check-in
+            logger.info(`🚀 Starting ${schedule.name} check-in (after ${delayMinutes}m delay)`);
             runCheckin(schedule.name);
         }, { timezone: config.timezone });
     });
