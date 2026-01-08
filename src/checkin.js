@@ -19,8 +19,8 @@ import path from 'path';
 // Apply stealth plugin
 puppeteer.use(StealthPlugin());
 
-const SKEMARAJA_URL = 'https://skemaraja.dephub.go.id/';
-const PEGAWAI_API_URL = 'https://skemaraja.dephub.go.id/api/pegawaiSelect';
+const SKEMARAJA_URL = 'https://skemaraja.kemenhub.go.id/';
+const PEGAWAI_API_URL = 'https://skemaraja.kemenhub.go.id/api/pegawaiSelect';
 const FONNTE_API = 'https://api.fonnte.com/send';
 
 // Fetch pegawai from API
@@ -157,9 +157,22 @@ export async function performCheckin(config) {
         // Random delay to appear human
         await randomDelay(1000, 2000);
 
-        // Wait for form to be visible
-        await page.waitForSelector('input[name="nip"]', { timeout: 30000 });
-        logger.info('📝 Login form detected');
+        // Take screenshot of initial page for debugging
+        await saveScreenshot(page, 'page_loaded');
+        logger.info('📸 Screenshot taken after page load');
+
+        // Wait for form to be visible with increased timeout
+        try {
+            await page.waitForSelector('input[name="nip"]', { timeout: 60000 });
+            logger.info('📝 Login form detected');
+        } catch (formError) {
+            // Take screenshot to see what's on the page
+            await saveScreenshot(page, 'form_not_found');
+            const currentUrl = page.url();
+            const pageTitle = await page.title();
+            logger.error(`❌ Form not found. URL: ${currentUrl}, Title: ${pageTitle}`);
+            throw new Error(`Form login tidak ditemukan. URL: ${currentUrl}`);
+        }
 
         // Random mouse movement
         await randomMouseMove(page);
