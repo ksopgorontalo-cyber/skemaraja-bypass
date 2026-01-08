@@ -641,7 +641,7 @@ function getDashboardHTML(config, users, logs) {
             
             try {
                 // Fetch directly from SKEMARAJA (not blocked from browser)
-                const res = await fetch('https://skemaraja.dephub.go.id/api/pegawaiSelect?kode_kantor=' + kodeKantor);
+                const res = await fetch('https://skemaraja.kemenhub.go.id/api/pegawaiSelect?kode_kantor=' + kodeKantor);
                 const data = await res.json();
                 
                 if (!data.results || data.results.length === 0) {
@@ -1004,7 +1004,7 @@ async function runCheckin(users, config, scheduleName = 'manual') {
             if (config.fonnteToken && user.phone) {
                 const waMessage = result.success
                     ? `✅ *SKEMA RAJA*\n\nHalo ${user.name || 'Bapak/Ibu'},\n\n${logMessage}\n\n📍 Lokasi: ${config.locationName}`
-                    : `❌ *SKEMA RAJA*\n\nHalo ${user.name || 'Bapak/Ibu'},\n\n${logMessage}\n\nSilakan cek manual di skemaraja.dephub.go.id`;
+                    : `❌ *SKEMA RAJA*\n\nHalo ${user.name || 'Bapak/Ibu'},\n\n${logMessage}\n\nSilakan cek manual di skemaraja.kemenhub.go.id`;
 
                 await sendWhatsAppNotification({
                     user,
