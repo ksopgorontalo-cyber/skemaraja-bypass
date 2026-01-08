@@ -1,0 +1,33 @@
+{
+  "name": "skemaraja-puppeteer",
+  "version": "1.0.0",
+  "description": "Auto check-in SKEMA RAJA dengan Puppeteer (human-like)",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "server": "node src/server.js",
+    "dashboard": "node src/server.js",
+    "checkin": "node src/index.js --manual",
+    "sync": "node src/index.js --sync",
+    "pagi": "node src/index.js --pagi",
+    "siang": "node src/index.js --siang",
+    "sore": "node src/index.js --sore",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "node-cron": "^3.0.3",
+    "puppeteer": "^21.6.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

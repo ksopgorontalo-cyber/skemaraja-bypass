@@ -1,0 +1,121 @@
+[
+  {
+    "type": "info",
+    "message": "Starting manual check-in for 1 users",
+    "timestamp": "2026-01-07T07:19:45.928Z"
+  },
+  {
+    "type": "info",
+    "user": "FARDI M. ISHAK",
+    "message": "Starting check-in...",
+    "timestamp": "2026-01-07T07:19:51.644Z"
+  },
+  {
+    "type": "success",
+    "user": "FARDI M. ISHAK",
+    "message": "Check-in berhasil! (11:29:24)",
+    "checkinTime": "11:29:24",
+    "timestamp": "2026-01-07T07:20:54.723Z"
+  },
+  {
+    "type": "info",
+    "message": "Check-in manual completed",
+    "timestamp": "2026-01-07T07:20:54.723Z"
+  },
+  {
+    "type": "info",
+    "message": "Memulai check-in Siang untuk 1 user",
+    "timestamp": "2026-01-07T07:47:02.327Z"
+  },
+  {
+    "type": "info",
+    "user": "FARDI M. ISHAK",
+    "message": "Memulai check-in Siang...",
+    "timestamp": "2026-01-07T07:47:22.596Z"
+  },
+  {
+    "type": "success",
+    "user": "FARDI M. ISHAK",
+    "message": "Telah melakukan check-in Siang pukul 11:29:24",
+    "checkinTime": "11:29:24",
+    "schedule": "Siang",
+    "timestamp": "2026-01-07T07:48:28.297Z"
+  },
+  {
+    "type": "info",
+    "message": "Check-in Siang selesai untuk 1 user",
+    "timestamp": "2026-01-07T07:48:28.298Z"
+  },
+  {
+    "type": "info",
+    "message": "Memulai check-in Sore untuk 1 user",
+    "timestamp": "2026-01-07T08:43:00.557Z"
+  },
+  {
+    "type": "info",
+    "user": "FARDI M. ISHAK",
+    "message": "Memulai check-in Sore...",
+    "timestamp": "2026-01-07T08:43:25.396Z"
+  },
+  {
+    "type": "success",
+    "user": "FARDI M. ISHAK",
+    "message": "Telah melakukan check-in Sore pukul 11:29:24",
+    "checkinTime": "11:29:24",
+    "schedule": "Sore",
+    "timestamp": "2026-01-07T08:44:29.588Z"
+  },
+  {
+    "type": "info",
+    "message": "Check-in Sore selesai untuk 1 user",
+    "timestamp": "2026-01-07T08:44:29.589Z"
+  },
+  {
+    "type": "info",
+    "message": "Memulai check-in Sore untuk 1 user",
+    "timestamp": "2026-01-07T09:02:15.903Z"
+  },
+  {
+    "type": "info",
+    "user": "FARDI M. ISHAK",
+    "message": "Memulai check-in Sore...",
+    "timestamp": "2026-01-07T09:02:26.465Z"
+  },
+  {
+    "type": "success",
+    "user": "FARDI M. ISHAK",
+    "message": "Telah melakukan check-in Sore pukul 16:43:52",
+    "checkinTime": "16:43:52",
+    "schedule": "Sore",
+    "timestamp": "2026-01-07T09:03:36.569Z"
+  },
+  {
+    "type": "info",
+    "message": "Check-in Sore selesai untuk 1 user",
+    "timestamp": "2026-01-07T09:03:36.788Z"
+  },
+  {
+    "type": "info",
+    "message": "Memulai check-in Pagi untuk 1 user",
+    "timestamp": "2026-01-08T00:24:38.572Z"
+  },
+  {
+    "type": "info",
+    "user": "FARDI M. ISHAK",
+    "message": "Memulai check-in Pagi...",
+    "timestamp": "2026-01-08T00:25:07.013Z"
+  },
+  {
+    "type": "success",
+    "user": "FARDI M. ISHAK",
+    "message": "Telah melakukan check-in Pagi pukul 08:25:32",
+    "checkinTime": "08:25:32",
+    "schedule": "Pagi",
+    "timestamp": "2026-01-08T00:26:10.962Z"
+  },
+  {
+    "type": "info",
+    "message": "Check-in Pagi selesai untuk 1 user",
+    "timestamp": "2026-01-08T00:26:11.204Z"
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "kodeKantor": "004036057000000",
+  "status": "2",
+  "shift": "1",
+  "latitude": 0.537831,
+  "longitude": 123.058388,
+  "locationName": "KSOP Gorontalo",
+  "timezone": "Asia/Makassar",
+  "fonnteAccountToken": "Cxazq9ip46fnvZaX2Lq4",
+  "fonnteToken": "QiWuubL7kjYrXVvxKDqu",
+  "fonnteDeviceNumber": "62895406585092",
+  "fonnteDeviceName": "GO-PERINTIS",
+  "schedules": [
+    {
+      "name": "Pagi",
+      "startHour": 7,
+      "startMinute": 0,
+      "endHour": 8,
+      "endMinute": 0,
+      "enabled": true
+    },
+    {
+      "name": "Siang",
+      "startHour": 12,
+      "startMinute": 5,
+      "endHour": 13,
+      "endMinute": 0,
+      "enabled": true
+    },
+    {
+      "name": "Sore",
+      "startHour": 17,
+      "startMinute": 0,
+      "endHour": 18,
+      "endMinute": 0,
+      "enabled": true
+    }
+  ]
+}
